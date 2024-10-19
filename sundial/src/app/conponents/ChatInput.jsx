@@ -9,6 +9,23 @@ export default function ChatInput({ className = "" }) {
   const [isInterfaceOpen, setIsInterfaceOpen] = useState(false);
   const { chatHistory, addMessage } = useChatHistory();
 
+  const sendMessageToBackend = async (message) => {
+    const response = await fetch("/api/chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ message }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to send message");
+    }
+
+    const data = await response.json();
+    return data.response;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (inputValue.trim()) {
@@ -33,6 +50,7 @@ export default function ChatInput({ className = "" }) {
       }
     }
   };
+
   return (
     <div
       className={`flex items-center bg-gradient-to-b from-[#2A2A2A] to-[#1C1C1C] rounded-full shadow-[0_2px_10px_rgba(0,0,0,0.1)] w-full max-w-2xl mx-auto sm:min-w-[600px] ${className}`}
