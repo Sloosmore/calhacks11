@@ -16,9 +16,9 @@ export default function MainHeader() {
   };
 
   return (
-    <header className="p-4 border-b border-gray-200 min-w-[800px] mx-auto">
-      <div className="flex justify-between items-center">
-        <div className="flex items-center w-[375px]">
+    <header className="p-4  border-gray-200 min-w-[800px] mx-auto px-6">
+      <div className="flex justify-between items-center border-b-2 px-6 pb-2">
+        <div className="flex items-center w-[350px]">
           <button
             onClick={() => navigateDay("prev")}
             className="text-gray-400 hover:text-gray-800"
@@ -43,7 +43,7 @@ export default function MainHeader() {
           </button>
         </div>
         <div className="flex items-center space-x-2 text-blue-500">
-          <span className="text-4xl font-bold">{temperature}°</span>
+          <span className="text-3xl font-bold">{temperature}°</span>
           <Cloud className="w-8 h-8" />
         </div>
       </div>
