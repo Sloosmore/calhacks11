@@ -23,6 +23,8 @@ export default function Component() {
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
         />
+
+        //helllo
         <div className="flex items-center space-x-4">
           <ArrowRight className="text-gray-400 w-6 h-6" aria-hidden="true" />
           <button
