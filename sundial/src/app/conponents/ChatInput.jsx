@@ -9,17 +9,17 @@ export default function ChatInput({ className = "" }) {
   const [isInterfaceOpen, setIsInterfaceOpen] = useState(false);
   const { chatHistory, addMessage } = useChatHistory();
 
-  const sendMessageToBackend = async (message) => {
+  const sendMessageToBackend = async (messages) => {
     const response = await fetch("/api/chat", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ message }),
+      body: JSON.stringify({ messages }),
     });
 
     if (!response.ok) {
-      throw new Error("Failed to send message");
+      throw new Error("Failed to send messages");
     }
 
     const data = await response.json();
@@ -29,20 +29,20 @@ export default function ChatInput({ className = "" }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (inputValue.trim()) {
-      // Add user message to chat history
-      addMessage({ isUser: true, content: inputValue.trim() });
+      const newUserMessage = { isUser: true, content: inputValue.trim() };
+      addMessage(newUserMessage);
       setInputValue("");
       setIsInterfaceOpen(true);
 
       try {
-        // Simulate sending the message to your backend
-        const response = await sendMessageToBackend(inputValue.trim());
+        // Send all messages to the backend
+        const allMessages = [...chatHistory, newUserMessage];
+        const response = await sendMessageToBackend(allMessages);
 
         // Add AI response to chat history
         addMessage({ isUser: false, content: response });
       } catch (error) {
-        console.error("Error sending message:", error);
-        // Optionally add an error message to the chat history
+        console.error("Error sending messages:", error);
         addMessage({
           isUser: false,
           content: "Sorry, I encountered an error. Please try again.",
