@@ -1,3 +1,5 @@
+"use client";
+
 import { Mic, Settings, ArrowRight } from "lucide-react";
 import { useState } from "react";
 
