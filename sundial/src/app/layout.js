@@ -1,6 +1,7 @@
 import localFont from "next/font/local";
 import "./globals.css";
 import { ChatHistoryProvider } from "./context/ChatHistory";
+import { DateProvider } from "./context/Date";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -24,7 +25,9 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ChatHistoryProvider>{children}</ChatHistoryProvider>{" "}
+        <DateProvider>
+          <ChatHistoryProvider>{children}</ChatHistoryProvider>
+        </DateProvider>
       </body>
     </html>
   );

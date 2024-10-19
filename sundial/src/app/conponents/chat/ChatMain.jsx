@@ -1,7 +1,7 @@
 "use client";
 import { Mic, Settings, ArrowRight, X } from "lucide-react";
 import { useState } from "react";
-import { useChatHistory } from "../context/ChatHistory";
+import { useChatHistory } from "../../context/ChatHistory";
 import ChatInput from "./ChatInput";
 
 export default function DynamicIsland() {
@@ -26,7 +26,7 @@ export default function DynamicIsland() {
               <X className="w-6 h-6" />
             </button>
           </div>
-          <div className="space-y-4 mb-6">
+          <div className="space-y-4 mb-6 max-w-[600px]">
             {chatHistory.map((message, index) => (
               <div
                 key={index}

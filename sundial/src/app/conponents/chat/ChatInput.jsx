@@ -1,7 +1,7 @@
 "use client";
 import { Mic, Settings, ArrowRight, X } from "lucide-react";
 import { useState } from "react";
-import { useChatHistory } from "../context/ChatHistory";
+import { useChatHistory } from "../../context/ChatHistory";
 
 export default function ChatInput({ className = "" }) {
   const [isFocused, setIsFocused] = useState(false);
