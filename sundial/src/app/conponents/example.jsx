@@ -5,9 +5,20 @@ import { useState } from "react";
 
 export default function Component() {
   const [isFocused, setIsFocused] = useState(false);
+  const [chatTitle, setChatTitle] = useState('');
+  const handleSendMessage = () => {
+    if (inputValue.trim()) {
+      if (!chatTitle) {
+        setChatTitle(inputValue.trim());
+      }
+      setMessages([...messages, { text: inputValue, sender: 'user' }]);
+      setInputValue('');
+      //helloo
+    }
+  };
 
   return (
-    <div className="flex items-center bg-gradient-to-b from-[#2A2A2A] to-[#1C1C1C] rounded-full h-16 shadow-[0_2px_10px_rgba(0,0,0,0.1)] w-full max-w-2xl mx-auto p-1">
+    <div className="border-4 border-gray-300 bg-gradient-to-b from-[#2A2A2A] to-[#1C1C1C] rounded-full h-16 shadow-[0_2px_10px_rgba(0,0,0,0.1)] flex items-center w-full max-w-2xl mx-auto p-5">
       <div
         className={`flex items-center flex-grow bg-[#1C1C1C] rounded-full h-14 px-6 transition-shadow duration-300 ${
           isFocused
@@ -24,7 +35,6 @@ export default function Component() {
           onBlur={() => setIsFocused(false)}
         />
 
-        //helllo
         <div className="flex items-center space-x-4">
           <ArrowRight className="text-gray-400 w-6 h-6" aria-hidden="true" />
           <button
