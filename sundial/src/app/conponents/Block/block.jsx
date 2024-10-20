@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 
-export default function Block({ title = "Interactive Marketing", startTime = "11:00", endTime = "12:50" }) {
+export default function Block() {
   const [isHovered, setIsHovered] = useState(false)
 
   return (
