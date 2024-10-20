@@ -14,11 +14,7 @@ export default function DynamicIsland() {
       {Array.isArray(chatHistory) && chatHistory.length > 0 && (
         <div className="p-4">
           <div className="flex justify-between items-center mb-6">
-            <h2 className="text-xl font-semibold">
-              Find times for a{" "}
-              <span className="text-[#7DD3FC]">meeting with Brandon</span>{" "}
-              tomorrow
-            </h2>
+            <h2 className="text-xl font-semibold">Untitled Conversation</h2>
             <button
               className="text-gray-400 hover:text-white transition-colors"
               onClick={clearHistory}
@@ -26,7 +22,7 @@ export default function DynamicIsland() {
               <X className="w-6 h-6" />
             </button>
           </div>
-          <div className="space-y-4 mb-6 max-w-[600px]">
+          <div className="space-y-4 mb-6 max-w-[600px] max-h-[300px] overflow-y-auto">
             {chatHistory.map((message, index) => (
               <div
                 key={index}
