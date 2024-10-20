@@ -1,12 +1,29 @@
-"use client";
-
 import { ChevronLeft, ChevronRight, Cloud } from "lucide-react";
 import { useDate } from "@/app/context/Date";
-import { useState } from "react";
+import { useState, useCallback, useEffect } from "react";
 
 export default function MainHeader() {
-  const { currentDate, navigateDay } = useDate();
-  const [temperature, setTemperature] = useState(74); // This would come from an API in a real app
+  const { currentDate, navigateDay, setCurrentDate } = useDate();
+  const [temperature, setTemperature] = useState(74);
+
+  const handleScroll = useCallback(
+    (event) => {
+      const scrollThreshold = 100; // Adjust this value to change sensitivity
+      if (event.deltaY > scrollThreshold) {
+        navigateDay("next");
+      } else if (event.deltaY < -scrollThreshold) {
+        navigateDay("prev");
+      }
+    },
+    [navigateDay]
+  );
+
+  useEffect(() => {
+    window.addEventListener("wheel", handleScroll);
+    return () => {
+      window.removeEventListener("wheel", handleScroll);
+    };
+  }, [handleScroll]);
 
   const formatDate = (date) => {
     const day = date.getDate();
@@ -16,9 +33,9 @@ export default function MainHeader() {
   };
 
   return (
-    <header className="p-4  border-gray-200 min-w-[800px] mx-auto px-6">
-      <div className="flex justify-between items-center border-b-2 px-6 pb-2">
-        <div className="flex items-center w-[350px]">
+    <header className="p-4 pt-6 border-gray-200 min-w-[800px] mx-auto px-6">
+      <div className="flex justify-between items-center border-b-2 px-6 pb-4">
+        <div className="flex items-center w-[325px]">
           <button
             onClick={() => navigateDay("prev")}
             className="text-gray-400 hover:text-gray-800"
@@ -26,7 +43,7 @@ export default function MainHeader() {
             <ChevronLeft className="w-4 h-4" />
           </button>
 
-          <h1 className="text-[1.65rem] font-bold flex-grow text-center">
+          <h1 className="text-[1.5rem] font-bold flex-grow text-center">
             <span className="font-semibold">
               {formatDate(currentDate).month} {formatDate(currentDate).day}
             </span>

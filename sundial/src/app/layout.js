@@ -2,6 +2,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { ChatHistoryProvider } from "./context/ChatHistory";
 import { DateProvider } from "./context/Date";
+import { CalendarProvider } from "./context/Calandar";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -26,7 +27,9 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <DateProvider>
-          <ChatHistoryProvider>{children}</ChatHistoryProvider>
+          <CalendarProvider>
+            <ChatHistoryProvider>{children}</ChatHistoryProvider>
+          </CalendarProvider>
         </DateProvider>
       </body>
     </html>

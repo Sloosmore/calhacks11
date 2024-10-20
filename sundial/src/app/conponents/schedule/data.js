@@ -1,11 +1,4 @@
-"use client";
-import DynamicIsland from "./conponents/chat/ChatMain";
-import MainHeader from "./conponents/header/MainBar";
-import Schedule from "./conponents/schedule/schedule";
-import { useCalendar } from "./context/Calandar";
-import { useEffect } from "react";
-
-const data = {
+export const data = {
   "2024-10-14/2024-10-20": {
     "2024-10-14": [
       {
@@ -289,25 +282,3 @@ const data = {
     ],
   },
 };
-
-export default function Home() {
-  const { currentDaySchedule, updateGlobalCalendarData } = useCalendar();
-
-  useEffect(() => {
-    updateGlobalCalendarData(data);
-  }, []);
-
-  return (
-    <div className="w-screen h-screen flex flex-col items-center justify-center bg-gradient-to-br from-purple-100 to-blue-100">
-      <div className="flex flex-col h-full max-w-[800px] max-h-[600px] shadow-lg rounded-xl z-20 bg-white">
-        <MainHeader />
-
-        <div className="flex-grow mx-10 overflow-auto h-[calc(100%-8rem)] ">
-          <Schedule currentDaySchedule={currentDaySchedule} />
-        </div>
-
-        <DynamicIsland className="h-14" />
-      </div>
-    </div>
-  );
-}
